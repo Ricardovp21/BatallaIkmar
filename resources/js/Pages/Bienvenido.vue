@@ -7,7 +7,7 @@ const hasToken = false; // Cambia a false para simular no logueado
 
 <style scoped>
 .fondo {
-    background-image: url('/Assets/Background/BgNaval.png');
+    background-image: url('/Assets/Background/FondoNoBarcos.png');
     background-size: cover;
     background-position: center;
     height: 100%;

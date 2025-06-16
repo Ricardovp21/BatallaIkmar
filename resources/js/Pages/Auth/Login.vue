@@ -1,15 +1,20 @@
 <script setup>
 import Checkbox from "@/Components/Checkbox.vue";
-import GuestLayout from "@/Layouts/GuestLayout.vue";
 import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 
+// Props con valores por defecto
 defineProps({
-    canResetPassword: Boolean,
-    status: String,
+    canResetPassword: {
+        type: Boolean,
+        default: false
+    },
+    status: {
+        type: String,
+        default: ''
+    }
 });
 
 const form = useForm({
@@ -26,25 +31,16 @@ const submit = () => {
 </script>
 
 <template>
-    <div
-        class="flex flex-col items-center justify-center w-full min-h-screen px-4 py-12"
-    >
-        <img
-            src="/Assets/Logos/LogoIkmar.png"
-            alt="Logo Ikmar"
-            class="w-48 h48 mb-8"
-        />
-        <div
-            class="w-full max-w-md bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 shadow-2xl text-white"
-        >
-            <h1 class="text-3xl font-bold text-center mb-6">
-                Bienvenido de nuevo
-            </h1>
+    <Head title="Iniciar Sesión" />
 
-            <div
-                v-if="status"
-                class="mb-4 text-green-400 text-sm text-center font-medium"
-            >
+    <div class="flex flex-col items-center justify-center w-full min-h-screen px-4 py-12 popo">
+            <div class="barcos"></div>
+        <img src="/Assets/Logos/LogoIkmar.png" alt="Logo Ikmar" class="w-48 h-48 mb-8" />
+
+        <div class="w-full max-w-md p-8 text-white border shadow-2xl bg-white/5 backdrop-blur-md border-white/10 rounded-2xl">
+            <h1 class="mb-6 text-3xl font-bold text-center">Bienvenido de nuevo</h1>
+
+            <div v-if="status" class="mb-4 text-sm font-medium text-center text-green-400">
                 {{ status }}
             </div>
 
@@ -54,7 +50,7 @@ const submit = () => {
                     <TextInput
                         id="email"
                         type="email"
-                        class="mt-1 block w-full bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-200 focus:ring-2 focus:ring-cyan-500 focus:outline-none"
+                        class="block w-full mt-1 text-white placeholder-gray-200 border rounded-lg bg-white/10 border-white/20 focus:ring-2 focus:ring-cyan-500 focus:outline-none"
                         v-model="form.email"
                         required
                         autofocus
@@ -65,15 +61,11 @@ const submit = () => {
                 </div>
 
                 <div>
-                    <InputLabel
-                        for="password"
-                        value="Password"
-                        class="text-white"
-                    />
+                    <InputLabel for="password" value="Password" class="text-white" />
                     <TextInput
                         id="password"
                         type="password"
-                        class="mt-1 block w-full bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-200 focus:ring-2 focus:ring-cyan-500 focus:outline-none"
+                        class="block w-full mt-1 text-white placeholder-gray-200 border rounded-lg bg-white/10 border-white/20 focus:ring-2 focus:ring-cyan-500 focus:outline-none"
                         v-model="form.password"
                         required
                         autocomplete="current-password"
@@ -84,38 +76,27 @@ const submit = () => {
 
                 <div class="flex items-center justify-between text-sm">
                     <label class="flex items-center text-gray-700">
-                        <Checkbox
-                            name="remember"
-                            v-model:checked="form.remember"
-                        />
+                        <Checkbox name="remember" v-model:checked="form.remember" />
                         <span class="ml-2">Recordarme</span>
                     </label>
-                    <Link
-                        v-if="canResetPassword"
-                        :href="route('password.request')"
-                        class="text-gray-700 hover:underline"
-                    >
+
+                    <Link v-if="canResetPassword" :href="route('password.request')" class="text-gray-700 hover:underline">
                         ¿Olvidaste tu contraseña?
                     </Link>
                 </div>
 
                 <div>
-                    <button
-                        type="submit"
-                        class="mb-3 btn login-btn w-full fw-bold"
-                    >
+                    <button type="submit" class="w-full mb-3 btn login-btn fw-bold">
                         Iniciar Sesión
                     </button>
                 </div>
             </form>
 
-            <p class="text-center mt-6 text-sm text-white/70">
+            <p class="mt-6 text-sm text-center text-white/70">
                 ¿No tienes cuenta?
-                <Link
-                    href="/register"
-                    class="text-gray-700 hover:underline ml-1"
-                    >Regístrate</Link
-                >
+                <Link href="/register" class="ml-1 text-gray-700 hover:underline">
+                    Regístrate
+                </Link>
             </p>
         </div>
     </div>
@@ -138,4 +119,33 @@ const submit = () => {
     transform: translateY(-6px) scale(1.05);
     box-shadow: 0 12px 25px rgba(255, 193, 7, 0.9);
 }
+.popo {
+    background-image: url('/Assets/Background/FondoNoBarcos.png');
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+}
+
+.barcos {
+    background-image: url('/Assets/Background/Barcos.png');
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    bottom: 187px;
+    animation: wave 5s linear infinite;
+}
+
+@keyframes wave {
+    0% { background-position: left 0 top 0; }
+    25% { background-position: center 10px; }
+    50% { background-position: right 0 top 5px; }
+    75% { background-position: center 10px; }
+    100% { background-position: left 0 top 0; }
+}
+
 </style>
