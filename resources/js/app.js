@@ -20,4 +20,8 @@ createInertiaApp({
     progress: {
         color: '#4B5563',
     },
+    resolve: (name) => {
+    return resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue'))
+},
+
 });

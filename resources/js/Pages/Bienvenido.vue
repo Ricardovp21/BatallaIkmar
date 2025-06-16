@@ -24,13 +24,15 @@ const hasToken = false; // Cambia a false para simular no logueado
     width: 100%;
     position: absolute;
     bottom: 187px;
-    animation: wave 1s linear infinite;
+    animation: wave 5s linear infinite;
 }
 
 @keyframes wave {
-    0% { background-position: center 0; }
-    50% { background-position: center 5px; }
-    100% { background-position: center 0; }
+    0% { background-position: left 0 top 0; }
+    25% { background-position: center 10px; }
+    50% { background-position: right 0 top 5px; }
+    75% { background-position: center 10px; }
+    100% { background-position: left 0 top 0; }
 }
 
 .logo {
