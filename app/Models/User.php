@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -41,4 +41,26 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get user statistics.
+     *
+     * @return array
+     */
+    public function stats()
+    {
+        // Example statistics, replace with your actual logic
+        return [
+            'games_played' => $this->games()->count(),
+            'games_won' => $this->games()->where('winner_id', $this->id)->count(),
+        ];
+    }
+
+    /**
+     * Relationship with games.
+     */
+    public function games()
+    {
+        return $this->hasMany(\App\Models\Game::class, 'creator_id');
+    }
 }
