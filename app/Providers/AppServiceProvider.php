@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use App\Models\Game;
+use App\Policies\GamePolicy;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -11,6 +14,12 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
+
+      protected $policies = [
+        Game::class => GamePolicy::class,
+        // Puedes añadir más políticas aquí
+    ];
+
     public function register()
     {
         //
@@ -23,6 +32,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->registerPolicies();
     }
 }
