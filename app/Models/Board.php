@@ -9,6 +9,10 @@ class Board extends Model
 {
     use HasFactory;
 
+       protected $fillable = [
+        'game_user_id',
+    ];
+
     public function gameUser()
     {
         return $this->belongsTo(GameUser::class);
