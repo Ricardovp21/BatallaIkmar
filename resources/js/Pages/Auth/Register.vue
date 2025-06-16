@@ -21,8 +21,9 @@ const submit = () => {
 
 <template>
     <div
-        class="flex flex-col items-center justify-center w-full min-h-screen px-4 py-12"
+        class="flex flex-col items-center justify-center w-full min-h-screen px-4 py-12 popo"
     >
+        <div class="barcos"></div>
         <img
             src="/Assets/Logos/LogoIkmar.png"
             alt="Logo Ikmar"
@@ -32,7 +33,7 @@ const submit = () => {
             class="w-full max-w-md bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 shadow-2xl text-white"
         >
             <h1 class="text-3xl font-bold text-center mb-6">
-                Bienvenido de nuevo
+                Bienvenido a Ikmar Battleship
             </h1>
 
             <div
@@ -107,45 +108,13 @@ const submit = () => {
                     />
                     <InputError
                         class="mt-2"
-                    <InputError
-                        class="mt-2"
                         :message="form.errors.password_confirmation"
-                    />      
+                    />
                 </div>
-
-                <div class="flex items-center justify-between text-sm">
-                    <label class="flex items-center text-gray-700">
-                        <Checkbox
-                            name="remember"
-                            v-model:checked="form.remember"
-                        />
-                        <span class="ml-2">Recordarme</span>
-                    </label>
-                    <Link
-                        v-if="canResetPassword"
-                        :href="route('password.request')"
-                        class="text-gray-700 hover:underline"
-                    >
-                        ¿Olvidaste tu contraseña?
-                    </Link>
-                </div>
-                    <button
-                        type="submit"
-                        class="mb-3 btn login-btn w-full fw-bold"
-                    >
-                        Iniciar Sesión
-                    </button>
-                </div>
+                <button type="submit" class="mb-3 btn login-btn w-full fw-bold">
+                    Registrarse
+                </button>
             </form>
-
-            <p class="text-center mt-6 text-sm text-white/70">
-                ¿No tienes cuenta?
-                <Link
-                    href="/register"
-                    class="text-gray-700 hover:underline ml-1"
-                    >Regístrate</Link
-                >
-            </p>
         </div>
     </div>
 </template>
@@ -166,5 +135,43 @@ const submit = () => {
 .login-btn:hover {
     transform: translateY(-6px) scale(1.05);
     box-shadow: 0 12px 25px rgba(255, 193, 7, 0.9);
+}
+.popo {
+    background-image: url("/Assets/Background/FondoNoBarcos.png");
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+}
+
+.barcos {
+    background-image: url("/Assets/Background/Barcos.png");
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    bottom: 187px;
+    animation: wave 5s linear infinite;
+}
+
+@keyframes wave {
+    0% {
+        background-position: left 0 top 0;
+    }
+    25% {
+        background-position: center 10px;
+    }
+    50% {
+        background-position: right 0 top 5px;
+    }
+    75% {
+        background-position: center 10px;
+    }
+    100% {
+        background-position: left 0 top 0;
+    }
 }
 </style>
