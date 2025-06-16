@@ -23,6 +23,18 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 });
 
+// ✅ Login manual
+Route::get('/login', function () {
+    return Inertia::render('Auth/Login', [
+        'canResetPassword' => true, // puedes poner true directamente si no quieres depender de rutas
+        'status' => session('status'),
+    ]);
+});
+
+// ✅ Register manual
+Route::get('/register', function () {
+    return Inertia::render('Auth/Register');
+});
 
 
 require __DIR__.'/auth.php';
